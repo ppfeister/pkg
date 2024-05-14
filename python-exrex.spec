@@ -6,6 +6,7 @@ Summary:        Irregular methods for regular expressions
 License:        AGPL-3.0-or-later
 URL:            https://github.com/asciimoo/exrex
 Source:         %{url}/archive/v%{version}/exrex-%{version}.tar.gz
+Patch:          https://patch-diff.githubusercontent.com/raw/asciimoo/exrex/pull/69.patch
 
 BuildArch:      noarch
 
@@ -14,7 +15,7 @@ BuildRequires:  help2man
 
 %global _description %{expand:
 Exrex is a command line tool and python module that generates all - or random -
-maching strings to a given regular expression and more.}
+matching strings to a given regular expression and more.}
 
 %description %{_description}
 
