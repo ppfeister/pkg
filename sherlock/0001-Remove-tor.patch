@@ -1,6 +1,6 @@
-From 7db6b055eee9446ad629887884af958930e1e576 Mon Sep 17 00:00:00 2001
+From 606743b99d7d8b42b40eefdfea4d2d233d305bb9 Mon Sep 17 00:00:00 2001
 From: Paul Pfeister <code@pfeister.dev>
-Date: Thu, 16 May 2024 02:37:24 -0400
+Date: Sat, 18 May 2024 01:29:11 -0400
 Subject: [PATCH] Remove tor
 
 ---
@@ -9,18 +9,18 @@ Subject: [PATCH] Remove tor
  2 files changed, 4 insertions(+), 58 deletions(-)
 
 diff --git a/sherlock/sherlock.py b/sherlock/sherlock.py
-index d487919..da54e02 100644
+index 9846cb5..7d89424 100644
 --- a/sherlock/sherlock.py
 +++ b/sherlock/sherlock.py
-@@ -20,7 +20,6 @@ from time import monotonic
- import requests
+@@ -31,7 +31,6 @@ from .__init__ import (
+ )
  
  from requests_futures.sessions import FuturesSession
 -from torrequest import TorRequest
  from sherlock.result import QueryStatus
  from sherlock.result import QueryResult
  from sherlock.notify import QueryNotifyPrint
-@@ -159,8 +158,6 @@ def sherlock(
+@@ -167,8 +166,6 @@ def sherlock(
      username,
      site_data,
      query_notify,
@@ -29,7 +29,7 @@ index d487919..da54e02 100644
      proxy=None,
      timeout=60,
  ):
-@@ -175,8 +172,6 @@ def sherlock(
+@@ -183,8 +180,6 @@ def sherlock(
      query_notify           -- Object with base type of QueryNotify().
                                This will be used to notify the caller about
                                query results.
@@ -38,7 +38,7 @@ index d487919..da54e02 100644
      proxy                  -- String indicating the proxy URL
      timeout                -- Time in seconds to wait before timing out request.
                                Default is 60 seconds.
-@@ -197,20 +192,10 @@ def sherlock(
+@@ -205,20 +200,10 @@ def sherlock(
  
      # Notify caller that we are starting the query.
      query_notify.start(username)
@@ -62,7 +62,7 @@ index d487919..da54e02 100644
  
      # Limit number of workers to 20.
      # This is probably vastly overkill.
-@@ -334,15 +319,10 @@ def sherlock(
+@@ -342,15 +327,10 @@ def sherlock(
              # Store future in data for access later
              net_info["request_future"] = future
  
@@ -78,7 +78,7 @@ index d487919..da54e02 100644
      for social_network, net_info in site_data.items():
          # Retrieve results again
          results_site = results_total.get(social_network)
-@@ -546,23 +526,7 @@ def main():
+@@ -554,23 +534,7 @@ def main():
          "-o",
          dest="output",
          help="If using single username, the output of the result will be saved to this file.",
@@ -103,7 +103,7 @@ index d487919..da54e02 100644
      parser.add_argument(
          "--csv",
          action="store_true",
-@@ -686,22 +650,10 @@ def main():
+@@ -694,22 +658,10 @@ def main():
      except Exception as error:
          print(f"A problem occurred while checking for an update: {error}")
  
@@ -126,7 +126,7 @@ index d487919..da54e02 100644
      if args.no_color:
          # Disable color output.
          init(strip=True, convert=False)
-@@ -780,8 +732,6 @@ def main():
+@@ -788,8 +740,6 @@ def main():
              username,
              site_data,
              query_notify,
