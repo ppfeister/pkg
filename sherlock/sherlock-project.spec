@@ -38,6 +38,10 @@ sed -i '/torrequest/d' 'pyproject.toml' # Pending upstream changes with Patch0
 
 
 %build
+# Project now uses Poetry and dynamic versioning, so pyproject version is 0
+# __init__ is currently the single source of truth for version info
+sherlock_version=$(sed -n 's/^__version__ *= *"\([0-9.]*\)"/\1/p' sherlock/__init__.py)
+sed -r -i "s/^version *= .*?$/version = \"$sherlock_version\"/" pyproject.toml
 %pyproject_wheel
 
 
