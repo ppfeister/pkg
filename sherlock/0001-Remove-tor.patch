@@ -1,35 +1,34 @@
-From 606743b99d7d8b42b40eefdfea4d2d233d305bb9 Mon Sep 17 00:00:00 2001
+From 14545ea60176a9d3ab99f15e032016411ca8f5bf Mon Sep 17 00:00:00 2001
 From: Paul Pfeister <code@pfeister.dev>
-Date: Sat, 18 May 2024 01:29:11 -0400
-Subject: [PATCH] Remove tor
+Date: Tue, 21 May 2024 17:44:20 -0400
+Subject: [PATCH] Remove torrequest
 
 ---
  sherlock/sherlock.py | 58 +++-----------------------------------------
- tests/base.py        |  4 ---
- 2 files changed, 4 insertions(+), 58 deletions(-)
+ 1 file changed, 4 insertions(+), 54 deletions(-)
 
 diff --git a/sherlock/sherlock.py b/sherlock/sherlock.py
-index 9846cb5..7d89424 100644
+index ff76f1f..44d9471 100644
 --- a/sherlock/sherlock.py
 +++ b/sherlock/sherlock.py
-@@ -31,7 +31,6 @@ from .__init__ import (
+@@ -32,7 +32,6 @@ from .__init__ import ( # noqa: E402
  )
  
- from requests_futures.sessions import FuturesSession
--from torrequest import TorRequest
- from sherlock.result import QueryStatus
- from sherlock.result import QueryResult
- from sherlock.notify import QueryNotifyPrint
-@@ -167,8 +166,6 @@ def sherlock(
+ from requests_futures.sessions import FuturesSession    # noqa: E402
+-from torrequest import TorRequest                       # noqa: E402
+ from sherlock.result import QueryStatus                 # noqa: E402
+ from sherlock.result import QueryResult                 # noqa: E402
+ from sherlock.notify import QueryNotify                 # noqa: E402
+@@ -169,8 +168,6 @@ def sherlock(
      username,
      site_data,
-     query_notify,
--    tor=False,
--    unique_tor=False,
+     query_notify: QueryNotify,
+-    tor: bool = False,
+-    unique_tor: bool = False,
      proxy=None,
      timeout=60,
  ):
-@@ -183,8 +180,6 @@ def sherlock(
+@@ -185,8 +182,6 @@ def sherlock(
      query_notify           -- Object with base type of QueryNotify().
                                This will be used to notify the caller about
                                query results.
@@ -38,7 +37,7 @@ index 9846cb5..7d89424 100644
      proxy                  -- String indicating the proxy URL
      timeout                -- Time in seconds to wait before timing out request.
                                Default is 60 seconds.
-@@ -205,20 +200,10 @@ def sherlock(
+@@ -207,20 +202,10 @@ def sherlock(
  
      # Notify caller that we are starting the query.
      query_notify.start(username)
@@ -62,7 +61,7 @@ index 9846cb5..7d89424 100644
  
      # Limit number of workers to 20.
      # This is probably vastly overkill.
-@@ -342,15 +327,10 @@ def sherlock(
+@@ -344,15 +329,10 @@ def sherlock(
              # Store future in data for access later
              net_info["request_future"] = future
  
@@ -78,7 +77,7 @@ index 9846cb5..7d89424 100644
      for social_network, net_info in site_data.items():
          # Retrieve results again
          results_site = results_total.get(social_network)
-@@ -554,23 +534,7 @@ def main():
+@@ -556,23 +536,7 @@ def main():
          "-o",
          dest="output",
          help="If using single username, the output of the result will be saved to this file.",
@@ -103,7 +102,7 @@ index 9846cb5..7d89424 100644
      parser.add_argument(
          "--csv",
          action="store_true",
-@@ -694,22 +658,10 @@ def main():
+@@ -696,22 +660,10 @@ def main():
      except Exception as error:
          print(f"A problem occurred while checking for an update: {error}")
  
@@ -126,7 +125,7 @@ index 9846cb5..7d89424 100644
      if args.no_color:
          # Disable color output.
          init(strip=True, convert=False)
-@@ -788,8 +740,6 @@ def main():
+@@ -790,8 +742,6 @@ def main():
              username,
              site_data,
              query_notify,
@@ -135,28 +134,6 @@ index 9846cb5..7d89424 100644
              proxy=args.proxy,
              timeout=args.timeout,
          )
-diff --git a/tests/base.py b/tests/base.py
-index 2146b88..bda8099 100644
---- a/tests/base.py
-+++ b/tests/base.py
-@@ -51,8 +51,6 @@ class SherlockBaseTest(unittest.TestCase):
-         # Create notify object for query results.
-         self.query_notify = QueryNotify()
- 
--        self.tor = False
--        self.unique_tor = False
-         self.timeout = None
-         self.skip_error_sites = True
- 
-@@ -115,8 +113,6 @@ class SherlockBaseTest(unittest.TestCase):
-             results = sherlock.sherlock(username,
-                                         site_data,
-                                         self.query_notify,
--                                        tor=self.tor,
--                                        unique_tor=self.unique_tor,
-                                         timeout=self.timeout
-                                        )
-             for site, result in results.items():
 -- 
 2.45.0
 

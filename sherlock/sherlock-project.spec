@@ -7,7 +7,7 @@ Summary:        Hunt down social media accounts by username across social networ
  #TODO Update URL and Source to upstream
 License:        MIT
 URL:            https://github.com/ppfeister/sherlock
-Source:         %{url}/archive/feature/pyproj.tar.gz
+Source:         %{url}/archive/feature/tox.tar.gz
 # Switch to new Source URL after adoption of tagged releases
 
 # Fedora compatibility (upstream dependency change planned)
@@ -30,11 +30,11 @@ websites. New targets are tested and implemented regularly.
 
  #TODO Update autosetup to upstream
 %prep
-%autosetup -p1 -n sherlock-feature-pyproj
+%autosetup -p1 -n sherlock-feature-tox
 sed -i '/torrequest/d' 'pyproject.toml' # Pending upstream changes with Patch0
 
 %generate_buildrequires
-%pyproject_buildrequires
+%pyproject_buildrequires -t -x dev
 
 
 %build
@@ -62,7 +62,7 @@ PYTHONPATH='%{buildroot}%{python3_sitelib}' help2man \
 
 
 %check
-%{py3_test_envvars} %{python3} -m unittest tests.all --verbose
+%tox
 
 
 %files -f %{pyproject_files}
