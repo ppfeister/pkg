@@ -62,7 +62,7 @@ PYTHONPATH='%{buildroot}%{python3_sitelib}' help2man \
 
 
 %check
-%tox
+%tox -e offline
 
 
 %files -f %{pyproject_files}
