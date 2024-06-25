@@ -6,8 +6,8 @@ Summary:        Hunt down social media accounts by username across social networ
 
  #TODO Update URL and Source to upstream
 License:        MIT
-URL:            https://github.com/ppfeister/sherlock
-Source:         %{url}/archive/feature/tox.tar.gz
+URL:            https://github.com/sherlock-project/sherlock
+Source:         %{url}/archive/master.tar.gz
 # Switch to new Source URL after adoption of tagged releases
 
 # Fedora compatibility (upstream dependency change planned)
