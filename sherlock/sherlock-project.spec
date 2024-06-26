@@ -1,10 +1,9 @@
-# Packager: Paul Pfeister <rh-bugzilla@pfeister.dev> (GitHub @ppfeister)
+# Packager: Paul Pfeister <ppfeister@fedoraproject.org> (GitHub @ppfeister)
 Name:           sherlock-project
 Version:        0.14.4
 Release:        %autorelease
 Summary:        Hunt down social media accounts by username across social networks
 
- #TODO Update URL and Source to upstream
 License:        MIT
 URL:            https://github.com/sherlock-project/sherlock
 Source:         %{url}/archive/master.tar.gz
@@ -12,13 +11,13 @@ Source:         %{url}/archive/master.tar.gz
 
 # Fedora compatibility (upstream dependency change planned)
 Patch0:         https://raw.githubusercontent.com/ppfeister/pkg/master/sherlock/0001-Remove-tor.patch
-
-
+#TODO All paths within repo will change to sherlock-project or sherlock_project at 0.15.0
 
 
 BuildArch:      noarch
 BuildRequires:  python3-devel
 BuildRequires:  help2man
+
 
 %global _description %{expand:
 Hunt down social media accounts by username across 400+ social networks and
@@ -28,9 +27,8 @@ websites. New targets are tested and implemented regularly.
 %description %{_description}
 
 
- #TODO Update autosetup to upstream
 %prep
-%autosetup -p1 -n sherlock-feature-tox
+%autosetup -p1 -n sherlock-master
 sed -i '/torrequest/d' 'pyproject.toml' # Pending upstream changes with Patch0
 
 %generate_buildrequires
@@ -73,5 +71,5 @@ PYTHONPATH='%{buildroot}%{python3_sitelib}' help2man \
 
 
 %changelog
-* Tue May 14 2024 Paul Pfeister <rh-bugzilla@pfeister.dev> 0.14.4-1
+* Tue Jun 26 2024 Paul Pfeister <ppfeister@fedoraproject.org> 0.14.4-1
 - Initial package.
