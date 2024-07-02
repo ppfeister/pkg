@@ -1,7 +1,7 @@
 # Packager: Paul Pfeister <ppfeister@fedoraproject.org> (GitHub @ppfeister)
 Name:           sherlock-project
 Version:        0.14.4
-Release:        %autorelease
+Release:        1%{?dist}
 Summary:        Hunt down social media accounts by username across social networks
 
 License:        MIT
@@ -71,5 +71,5 @@ PYTHONPATH='%{buildroot}%{python3_sitelib}' help2man \
 
 
 %changelog
-* Tue Jun 26 2024 Paul Pfeister <ppfeister@fedoraproject.org> 0.14.4-1
+* Tue Jun 26 2024 Paul Pfeister <code@pfeister.dev> 0.14.4-1
 - Initial package.
