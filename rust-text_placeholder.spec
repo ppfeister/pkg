@@ -5,11 +5,11 @@
 %global crate text_placeholder
 
 Name:           rust-text_placeholder
-Version:        0.5.0
+Version:        0.5.1
 Release:        %autorelease
 Summary:        Flexible text template engine
 
-License:        MIT OR Apache-2.0
+License:        MIT
 URL:            https://crates.io/crates/text_placeholder
 Source:         %{crates_source}
 
@@ -30,7 +30,7 @@ This package contains library source intended for building other packages which
 use the "%{crate}" crate.
 
 %files          devel
-# FIXME: no license files detected
+%license %{crate_instdir}/LICENSE
 %doc %{crate_instdir}/README.md
 %{crate_instdir}/
 
