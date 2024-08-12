@@ -1,0 +1,9 @@
+- sylva
+  - TextBlob
+    - nltk
+      - mdit-plain
+      - crfsuite
+        - milksnake
+      - twython
+        - python-coveralls
+        - nose-cov
