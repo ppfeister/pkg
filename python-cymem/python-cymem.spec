@@ -6,11 +6,13 @@ Summary:        Cython memory pool for RAII-style memory management
 
 License:        MIT
 URL:            https://github.com/explosion/cymem
-Source:         %{url}/archive/%{version}/cymem-%{version}.tar.gz
+Source:         %{url}/archive/v%{version}/cymem-%{version}.tar.gz
 
-BuildArch:      noarch
+BuildArch:      x86_64 aarch64
 
 BuildRequires:  python3-devel
+BuildRequires:  python3-cython
+BuildRequires:  gcc-c++
 
 %global _description %{expand:
 cymem provides two small memory-management helpers for Cython. They make it
@@ -27,8 +29,11 @@ Summary:        %{summary}
 %prep
 %autosetup -n cymem-%{version}
 
+# PyProject file not complete and throws off macros
+rm -fv pyproject.toml
+
 %generate_buildrequires
-%pyproject_buildrequires -t
+%pyproject_buildrequires
 
 
 %build
