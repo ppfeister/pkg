@@ -1,3 +1,5 @@
+# requires cymem
+
 Name:           python-preshed
 Version:        3.0.9
 Release:        1%{?dist}
