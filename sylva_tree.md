@@ -1,9 +1,47 @@
 - sylva
-  - TextBlob
-    - nltk
-      - mdit-plain
-      - crfsuite
-        - milksnake
-      - twython
-        - python-coveralls
-        - nose-cov
+  - func-timeout (easy, with odd license Bug Report)
+  - spacy
+    - thinc
+      - preshed
+        - cymem (review open) ***
+      - blis (ELIGIBLE)
+      - confection
+        - srsly
+          - catalogue
+            - mypy
+              - types-psutil (review open) ***
+        - pathy
+          - pathlib_abc (review open) ***
+        - mypy (above)
+      - wasabi
+        - mypy (above)
+        - types-colorama (review open) ***
+      - ml-datasets
+        - srsly (above)
+        - catalogue (above)
+        - scipy (eligible, but needs test depends?)
+          - asv
+            - pympler (ELIGIBLE) (UPSTREAM TESTS BROKEN)
+            - asv-runner
+              - sphinx-autodoc2 (ELIGIBLE) (weird)
+          - scikit-umfpack (ELIGIBLEish) CROSS DEPENDANT WITH SCIPY
+          - array-api-strict (review open) ***
+          - ninja https://github.com/scikit-build/ninja-python-distributions (ELIGIBLE)
+      - mypy (above)
+      - types-mock (review open) ***
+      - pathy (above)
+    - ml_datasets
+    - wasabi (above)
+    - srsly (above)
+    - catalogue (above)
+    - weasel
+      - confection (above)
+      - wasabi (above)
+      - srsly (above)
+      - cloudpathlib (ELIGIBLE)
+      - mypy (above)
+      - pre-commit (ELIGIBLE)
+    - langcodes
+      - language-data (ELIGIBLE)
+    - types-mock (above)
+    - cython-lint (ELIGIBLE)

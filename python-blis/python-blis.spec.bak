@@ -1,0 +1,59 @@
+Name:           python-blis
+Version:        1.0.0
+Release:        1%{?dist}
+Summary:        Fast matrix-multiplication as a self-contained Python library
+
+
+License:        MIT
+URL:            https://github.com/explosion/cython-blis
+Source:         %{url}/archive/release-v%{version}/cython-blis-%{version}.tar.gz
+
+BuildArch:      noarch
+
+BuildRequires:  python3-devel
+BuildRequires:  python3-pytest
+BuildRequires:  python3-cython
+BuildRequires:  gcc-c++
+
+%global _description %{expand:
+Fast matrix-multiplication as a self-contained Python library.}
+
+%description %{_description}
+
+%package -n     python3-blis
+Summary:        %{summary}
+
+%description -n python3-blis %{_description}
+
+%prep
+%autosetup -n cython-blis-release-v%{version}
+
+# Relax numpy for fedora#2210209 and fedora#2239427
+sed -i 's/numpy>=2\.0\.0,<3\.0\.0/numpy>=1.26.0/' pyproject.toml
+sed -i 's/numpy>=2\.0\.0,<3\.0\.0/numpy>=1.26.0/' requirements.txt
+sed -i 's/numpy>=2\.0\.0,<3\.0\.0/numpy>=1.26.0/' setup.py
+
+%generate_buildrequires
+%pyproject_buildrequires
+
+
+%build
+%pyproject_wheel
+
+
+%install
+%pyproject_install
+%pyproject_save_files -l blis
+
+
+%check
+%pytest --pyargs blis -Werror
+
+
+%files -n python3-blis -f %{pyproject_files}
+%doc README.md
+
+
+%changelog
+* Sun Aug 11 2024 Paul Pfeister <code@pfeister.dev> - 0.1.5-1
+- Initial package.

@@ -1,0 +1,29 @@
+From e0fad46bf62e3bf3742e503047ad0ce2729b6970 Mon Sep 17 00:00:00 2001
+From: Paul Pfeister <code@pfeister.dev>
+Date: Wed, 14 Aug 2024 23:16:02 -0400
+Subject: [PATCH] Fix import for Sphinx > 7.0.0
+
+---
+ tests/test_render.py | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
+
+diff --git a/tests/test_render.py b/tests/test_render.py
+index 219699d..3a61c2d 100644
+--- a/tests/test_render.py
++++ b/tests/test_render.py
+@@ -12,7 +12,11 @@ from autodoc2.render.rst_ import RstRenderer
+ from autodoc2.utils import yield_modules
+ import pytest
+ from sphinx.testing.util import SphinxTestApp
+-from sphinx.testing.util import path as sphinx_path
++
++try:
++    from sphinx.testing.util import path as sphinx_path
++except ImportError:
++    from sphinx.testing.path import path as sphinx_path
+ 
+ 
+ @pytest.mark.parametrize(
+-- 
+2.46.0
+

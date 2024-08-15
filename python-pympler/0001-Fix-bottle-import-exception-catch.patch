@@ -1,0 +1,25 @@
+From d223ee5ebfc3f7a1e8d995975640204863fed4be Mon Sep 17 00:00:00 2001
+From: Paul Pfeister <code@pfeister.dev>
+Date: Wed, 14 Aug 2024 21:01:07 -0400
+Subject: [PATCH] Fix bottle import exception catch
+
+---
+ pympler/web.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/pympler/web.py b/pympler/web.py
+index 12888ab..07885c8 100644
+--- a/pympler/web.py
++++ b/pympler/web.py
+@@ -37,7 +37,7 @@ from pympler.util.stringutils import safe_repr
+ # fallback to the vendored version.
+ try:
+     import bottle
+-except ImportError:
++except ModuleNotFoundError:
+     from pympler.util import bottle
+ 
+ 
+-- 
+2.46.0
+
