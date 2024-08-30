@@ -1,6 +1,10 @@
 - sylva
+  - pandas-stubs
+  - types-beautifulsoup4
+  - tox-pdm
   - func-timeout (easy, with odd license Bug Report)
   - spacy
+  
     - thinc
       - preshed
         - cymem (review open) ***
@@ -30,6 +34,7 @@
       - mypy (above)
       - types-mock (review open) ***
       - pathy (above)
+
     - ml_datasets
     - wasabi (above)
     - srsly (above)
@@ -41,7 +46,13 @@
       - cloudpathlib (ELIGIBLE)
       - mypy (above)
       - pre-commit (ELIGIBLE)
+
     - langcodes
       - language-data (ELIGIBLE)
+
     - types-mock (above)
     - cython-lint (ELIGIBLE)
+- oai
+  - jiter
+    - ahash
+      - criterion

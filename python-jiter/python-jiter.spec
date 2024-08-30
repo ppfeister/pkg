@@ -6,11 +6,14 @@ Summary:        Fast iterable JSON parser
 
 License:        MIT
 URL:            https://github.com/pydantic/jiter
-Source:         %{url}/archive/v%{version}/jiter-%{version}.tar.gz
+Source0:         %{url}/archive/v%{version}/jiter-%{version}.tar.gz
+
+Patch0:         0001-Cleanup-dependencies-and-remove-benchmarking.patch
 
 BuildArch:      noarch
 
 BuildRequires:  python3-devel
+BuildRequires:  cargo-rpm-macros >= 24
 
 %global _description %{expand:
 This is a standalone version of the JSON parser used in pydantic-core. The
@@ -25,13 +28,15 @@ Summary:        %{summary}
 %description -n python3-jiter %{_description}
 
 %prep
-%autosetup -n jiter-%{version}
+%cargo_prep
+%autosetup -p1 -n jiter-%{version}
 cd crates/jiter-python
 
 
 %generate_buildrequires
 cd crates/jiter-python
 %pyproject_buildrequires
+%cargo_generate_buildrequires
 
 
 %build
@@ -41,6 +46,11 @@ cd crates/jiter-python
 %install
 %pyproject_install
 %pyproject_save_files -l jiter
+
+
+%check
+	
+%pyproject_check_import
 
 
 %files -n python3-jiter -f %{pyproject_files}
